@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Notes - Learnify</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #062d46;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .filter-bar {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-bar select, .filter-bar input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .filter-bar button {
+            padding: 10px;
+            background-color: #062d46;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .filter-bar button:hover {
+            background-color: #2980b9;
+        }
+
+        .note-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .note-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .note-card h3 {
+            font-size: 18px;
+            color: #062d46;
+        }
+
+        .note-card p {
+            color: #777;
+        }
+
+        .note-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #2980b9;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .note-card a:hover {
+            background-color: #062d46;
+        }
+
+        footer {
+            background-color: #062d46;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Learnify - View All Notes</h1>
+    </header>
+
+    <div class="container">
+        <!-- Filter bar for subject and type selection -->
+        <div class="filter-bar">
+            <!-- Subject Dropdown -->
+            <select id="subject-select">
+                <option value="">Select Subject</option>
+                <option value="Hindi">Hindi</option>
+                <option value="English">English</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Physics">Physics</option>
+                <!-- Add more subjects here -->
+            </select>
+
+            <!-- Type Dropdown -->
+            <select id="type-select">
+                <option value="">Select Type</option>
+                <option value="Notes">Notes</option>
+                <option value="Previous Year Papers">Previous Year Papers</option>
+                <option value="Presentations">Presentations</option>
+                <!-- Add more types here -->
+            </select>
+
+            <!-- Search bar -->
+            <input type="text" id="search-input" placeholder="Search for notes..." onkeyup="searchNotes()">
+            <button onclick="filterNotes()">Filter</button>
+        </div>
+
+        <!-- Notes Listing -->
+        <div class="note-list" id="note-list">
+            <!-- Dynamic Note Cards will appear here based on selection -->
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Learnify. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const notesData = [
+            { title: 'Mathematics Notes', subject: 'Mathematics', type: 'Notes', file: 'math_notes.pdf', date: 'Jan 25, 2025' },
+            { title: 'Physics Previous Year Papers', subject: 'Physics', type: 'Previous Year Papers', file: 'physics_papers.pdf', date: 'Jan 22, 2025' },
+            { title: 'Chemistry Presentation', subject: 'Chemistry', type: 'Presentations', file: 'chemistry_presentation.pdf', date: 'Jan 15, 2025' },
+            { title: 'Hindi Notes', subject: 'Hindi', type: 'Notes', file: 'hindi_notes.pdf', date: 'Jan 10, 2025' },
+            { title: 'English Notes', subject: 'English', type: 'Notes', file: 'english_notes.pdf', date: 'Jan 5, 2025' },
+            { title: 'Mathematics Previous Year Papers', subject: 'Mathematics', type: 'Previous Year Papers', file: 'math_papers.pdf', date: 'Dec 15, 2024' },
+            // Add more data as needed
+        ];
+
+        // Function to display all notes
+        function displayNotes(filteredNotes) {
+            const noteList = document.getElementById('note-list');
+            noteList.innerHTML = '';
+
+            filteredNotes.forEach(note => {
+                const noteCard = document.createElement('div');
+                noteCard.classList.add('note-card');
+
+                noteCard.innerHTML = `
+                    <h3>${note.title}</h3>
+                    <p>Subject: ${note.subject} | Type: ${note.type} | Uploaded on: ${note.date}</p>
+                    <a href="#" onclick="viewNote('${note.file}')">View & Download</a>
+                `;
+                noteList.appendChild(noteCard);
+            });
+        }
+
+        // Function to filter notes based on subject, type, and search
+        function filterNotes() {
+            const subject = document.getElementById('subject-select').value;
+            const type = document.getElementById('type-select').value;
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+
+            const filteredNotes = notesData.filter(note => {
+                const subjectMatch = subject ? note.subject.toLowerCase() === subject.toLowerCase() : true;
+                const typeMatch = type ? note.type.toLowerCase() === type.toLowerCase() : true;
+                const searchMatch = searchInput ? note.title.toLowerCase().includes(searchInput) || note.subject.toLowerCase().includes(searchInput) : true;
+
+                return subjectMatch && typeMatch && searchMatch;
+            });
+
+            displayNotes(filteredNotes);
+        }
+
+        // Function to simulate file download
+        function viewNote(file) {
+            alert('Downloading file: ' + file);
+            // Here, you can replace this with actual download functionality
+        }
+
+        // Function for searching notes dynamically
+        function searchNotes() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const filteredNotes = notesData.filter(note => {
+                return note.title.toLowerCase().includes(searchInput) || note.subject.toLowerCase().includes(searchInput);
+            });
+
+            displayNotes(filteredNotes);
+        }
+
+        // Initialize by displaying all notes
+        displayNotes(notesData);
+    </script>
+
+</body>
+</html>
