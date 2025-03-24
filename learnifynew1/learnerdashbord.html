@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learner Dashboard - Learnify</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1e6e72, #2a5298);
+            color: white;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+        @keyframes backgroundAnimation {
+            0% { background-position: left; }
+            100% { background-position: right; }
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .subject-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .subject-card {
+            background: #fff;
+            color: #000000;
+            padding: 15px;
+            width: 200px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .subject-card:hover {
+            background: #1f3761;
+            color: white;
+        }
+        .download-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            background: #4b649f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .download-btn:hover {
+            background: #11449c;
+        }
+        h4{
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Learner in Learnify</h1>
+        <h4>"Knowledge is the key to success,unlock your potential with Learnify!"</h4>
+        
+        <!-- Study Materials Section -->
+        <div class="section">
+            <h2>Study Materials</h2>
+            <div class="subject-container">
+                <div class="subject-card">Database Management System</div>
+                <div class="subject-card">Design & Algorithm</div>
+                <div class="subject-card">Discrete Mathematics</div>
+                <div class="subject-card">Data Structure</div>
+                <div class="subject-card">Web Technology</div>
+                <div class="subject-card">Software Engineering</div>
+                <div class="subject-card">Cloud Computing</div>
+                <div class="subject-card">Computer Networks</div>
+                <div class="subject-card">IT Project Management</div>
+            </div>
+        </div>
+        
+        <!-- Previous Year Papers Section -->
+        <div class="section">
+            <h2>Previous Year Papers</h2>
+            <div class="subject-container">
+                <div class="subject-card">
+                    Database Management System
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+                <div class="subject-card">
+                    Design & Algorithm
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+                <div class="subject-card">
+                    Discrete Mathematics
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+                <div class="subject-card">
+                    Data Structure
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+                <div class="subject-card">
+                    Web Technology
+                    <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
